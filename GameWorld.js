@@ -1,6 +1,6 @@
 function GameWorld(){
     this.whiteBall = new Ball(new Vector2(413, 413));
-    this.stick = new Stick();
+    this.stick = new Stick(new Vector2(413, 413));
 }
 
 GameWorld.prototype.update = function(){
