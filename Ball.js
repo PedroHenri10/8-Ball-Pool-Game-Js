@@ -4,6 +4,7 @@ function Ball(position){
     this.position = position;
     this.velocity = new Vector2();
     this.moving = false;
+    this.sprite = getBallSpriteByColor(color);
 }
 
 Ball.prototype.update = function(delta){
@@ -17,7 +18,7 @@ Ball.prototype.update = function(delta){
 }
 
 Ball.prototype.draw = function(){
-    Canvas.drawImage(sprites.whiteBall, this.position, BALL_ORIGIN);
+    Canvas.drawImage(this.sprites, this.position, BALL_ORIGIN);
 }
 
 Stick.prototype.shoot = function(power, rotation){

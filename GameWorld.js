@@ -1,7 +1,7 @@
 const DELTA = 1/100;
 
 function GameWorld(){
-    this.whiteBall = new Ball(new Vector2(413, 413));
+    this.whiteBall = new Ball(new Vector2(413, 413), COLOR.WHITE);
     this.stick = new Stick(new Vector2(413, 413), this.whiteBall.shoot.bind(this.whiteBall));
 }
 

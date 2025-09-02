@@ -45,3 +45,9 @@ Stick.prototype.shoot = function(){
     this.origin = STICK_SHOT_ORIGIN.copy();
     this.shot = true;
 }
+
+Stick.prototype.reposition = function(position){
+    this.position = position.copy();
+    this.origin = STICK_ORIGIN.copy();
+    this.shot = false;
+}
