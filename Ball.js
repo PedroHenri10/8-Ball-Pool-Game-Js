@@ -70,6 +70,16 @@ Ball.prototype.collideWithTable = function(table){
         this.velocity = new Vector2(-this.velocity.x, this.velocity.y);
         collided = true;
     }
+
+    if(this.position.y >= table.BottomY - BALL_RADIUS){
+        this.velocity = new Vector2(this.velocity.x, -this.velocity.y);
+        collided = true;
+    }
+
+    if(this.position.x <= table.LefrX - BALL_RADIUS){
+        this.velocity = new Vector2(-this.velocity.x, this.velocity.y);
+        collided = true;
+    }
 }
 
 Ball.prototype.draw = function(){
