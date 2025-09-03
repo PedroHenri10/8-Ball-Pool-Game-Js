@@ -48,7 +48,3 @@ GameWorld.prototype.ballsMoving = function(){
         }
     }
 }
-
-ball.prototype.collideWith = function(ball){
-    
-}
