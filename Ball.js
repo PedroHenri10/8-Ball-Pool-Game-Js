@@ -1,5 +1,6 @@
 const BALL_ORIGIN =new Vector2(25,25);
 const BALL_DIAMETER = 30;
+const BALL_RADIUS = BALL_DIAMETER/2;
 
 function Ball(position){
     this.position = position;
@@ -10,7 +11,7 @@ function Ball(position){
 
 Ball.prototype.update = function(delta){
     this.position.addTo(this.velocity.mult(delta));
-    this.velocity = this.velocity.mult(0.98);
+    this.velocity = this.velocity.mult(0.984);
 
     if(this.velocity.length() < 5){
         this.velocity = new Vector2();
@@ -18,15 +19,7 @@ Ball.prototype.update = function(delta){
     }
 }
 
-Ball.prototype.draw = function(){
-    Canvas.drawImage(this.sprites, this.position, BALL_ORIGIN);
-}
-
-Stick.prototype.shoot = function(power, rotation){
-    this.velocity = new Vector2(power * Math.cos(rotation), power * Math.sin(rotation));
-}
-
-ball.prototype.collideWith = function(ball){
+Ball.prototype.collideWithBall = function(ball){
     const n = this.position.subtract(ball.position);
     
     const dist = n.length();
@@ -59,4 +52,28 @@ ball.prototype.collideWith = function(ball){
 
     this.moving = true;
     ball.moving = true;
+}
+
+Ball.prototype.collideWithTable = function(table){
+    if(!this.moving){
+        return;
+    }
+
+    let collided = false;
+}
+
+Ball.prototype.draw = function(){
+    Canvas.drawImage(this.sprites, this.position, BALL_ORIGIN);
+}
+
+Stick.prototype.shoot = function(power, rotation){
+    this.velocity = new Vector2(power * Math.cos(rotation), power * Math.sin(rotation));
+}
+
+ball.prototype.collideWith = function(object){
+    if(object instanceof Ball){
+        this.collideWithBall(object);
+    }else{
+        this.collideWithTable(object);
+    }
 }
