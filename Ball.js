@@ -80,6 +80,10 @@ Ball.prototype.collideWithTable = function(table){
         this.velocity = new Vector2(-this.velocity.x, this.velocity.y);
         collided = true;
     }
+
+    if(collided){
+        this.velocity = this.velocity.mult(0.98);
+    }
 }
 
 Ball.prototype.draw = function(){
