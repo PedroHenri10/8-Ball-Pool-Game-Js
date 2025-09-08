@@ -25,12 +25,12 @@ function loadAssets(callback){
 
         return spriteImage;
     }
-    sprites.background = loadSprite('spr_background.png');
+    sprites.background = loadSprite('spr_background5.png');
     sprites.stick = loadSprite('spr_stick.png');
     sprites.whiteBall = loadSprite('spr_whiteBall.png');
-    sprites.redBall = loadSprite('spr_redBall.png');
-    sprites.yellowBall = loadSprite('spr_yellowBall.png');
-    sprites.blackBall = loadSprite('spr_blackBall.png');
+    sprites.redBall = loadSprite('spr_redBall2.png');
+    sprites.yellowBall = loadSprite('spr_yellowBall2.png');
+    sprites.blackBall = loadSprite('spr_blackBall2.png');
 
     assetsLoadingLoop(callback);
 }

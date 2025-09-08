@@ -3,20 +3,20 @@ function Game(){
 }
 
 Game.prototype.init = function(){
-    this.gameWorld = new GameWorld();
+    this.GameWorld = new GameWorld();
 }
 
-Game.prototype.start = function(){
+PoolGame.start = function(mode, difficultySetting) {
+    PoolGame.gameMode = mode;
+    PoolGame.difficulty = difficultySetting;
     PoolGame.init();
-
-    PoolGame.mainLoop();
-
-}
+    PoolGame.mainLoop(); 
+};
 
 Game.prototype.mainLoop = function(){
     Canvas.clear();
-    PoolGame.gameWorld.update();
-    PoolGame.gameworld.draw();
+    PoolGame.GameWorld.update();
+    PoolGame.Gameworld.draw();
     Mouse.reset();
 
     requestAnimationFrame(PoolGame.mainLoop);

@@ -1,6 +1,6 @@
-const COLOR ={
-    RED: 1,
-    YELLOW: 2,
-    BLACK: 3, 
-    WHITE: 4
-}
+const COLOR = {
+    RED: 'red',
+    YELLOW: 'yellow',
+    BLACK: 'black',
+    WHITE: 'white'
+};
