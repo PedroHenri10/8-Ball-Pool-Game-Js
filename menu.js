@@ -7,7 +7,7 @@ document.getElementById('player-vs-player-btn').addEventListener('click', () => 
     menuOverlay.style.display = 'none'; 
     gameUI.style.display = 'block'; 
     
-    game.init('PvP'); 
+    startGame('PvP'); 
 });
 
 document.getElementById('player-vs-computer-btn').addEventListener('click', () => {
@@ -35,7 +35,6 @@ document.querySelectorAll('.difficulty-button').forEach(button => {
         const difficulty = event.target.dataset.difficulty;
         difficultyOverlay.style.display = 'none'; 
         gameUI.style.display = 'block'; 
-        game.init('PvC', difficulty); 
+        startGame('PvC', difficulty); 
     });
 });
-
