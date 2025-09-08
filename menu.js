@@ -30,4 +30,42 @@ let gameMode = null;
                 PoolGame.start(gameMode, difficulty); 
             }
 
+            playerVsPlayerBtn.addEventListener('click', () => {
+                gameMode = 'PvP';
+                difficulty = null; 
+                startGame();
+            });
+
+            playerVsComputerBtn.addEventListener('click', () => {
+                menuOverlay.style.display = 'none';
+                difficultyOverlay.style.display = 'flex';
+            });
+
+            aboutBtn.addEventListener('click', () => {
+                menuOverlay.style.display = 'none';
+                controlsOverlay.style.display = 'flex';
+            });
+
+            controlsBackBtn.addEventListener('click', () => {
+                showMenu();
+            });
+
+            difficultyBackBtn.addEventListener('click', () => {
+                showMenu();
+            });
+
+            document.querySelectorAll('#difficulty-overlay .difficulty-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    gameMode = 'PvC';
+                    difficulty = event.target.dataset.difficulty;
+                    startGame();
+                });
+            });
+
+            loadAssets(showMenu); 
             
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    showMenu();
+                }
+            });
