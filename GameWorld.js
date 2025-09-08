@@ -79,3 +79,4 @@ GameWorld.prototype.draw = function(){
     }
 
     this.stick.draw(); 
+}
