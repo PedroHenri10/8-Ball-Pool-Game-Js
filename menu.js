@@ -22,4 +22,12 @@ let gameMode = null;
                 }
             }
 
+            function startGame() {
+                menuOverlay.style.display = 'none';
+                controlsOverlay.style.display = 'none';
+                difficultyOverlay.style.display = 'none';
+                gameUI.style.display = 'block';
+                PoolGame.start(gameMode, difficulty); 
+            }
+
             
