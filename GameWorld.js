@@ -1,42 +1,55 @@
-const DELTA = 1/100;
+const DELTA = 1/100; 
 
 function GameWorld(){
-
     this.balls = [
-    new Ball(new Vector2(1056,433),Color.red),//3
-    new Ball(new Vector2(1090,374),Color.red),//4
-    new Ball(new Vector2(1126,393),Color.red),//8
-    new Ball(new Vector2(1126,472),Color.red),//10;
-    new Ball(new Vector2(1162,335),Color.red),//11
-    new Ball(new Vector2(1162,374),Color.red),//12
-    new Ball(new Vector2(1162,452),Color.red),
-    new Ball(new Vector2(1022,413),Color.yellow),//1
-    new Ball(new Vector2(1056,393),Color.yellow),//2
-    new Ball(new Vector2(1090,452),Color.yellow),//6
-    new Ball(new Vector2(1126,354),Color.yellow),//7
-    new Ball(new Vector2(1126,433),Color.yellow),//9
-    new Ball(new Vector2(1162,413),Color.yellow),//13
-    new Ball(new Vector2(1162,491),Color.yellow)
-    ].map(params => new Ball(params[0], params[1]));
+        new Ball(new Vector2(1056,433), COLOR.RED),
+        new Ball(new Vector2(1090,374), COLOR.RED),
+        new Ball(new Vector2(1126,472), COLOR.RED),
+        new Ball(new Vector2(1162,335), COLOR.RED),
+        new Ball(new Vector2(1162,374), COLOR.RED),
+        new Ball(new Vector2(1162,452), COLOR.RED),
+        new Ball(new Vector2(1022,413), COLOR.YELLOW),
+        new Ball(new Vector2(1056,393), COLOR.YELLOW),
+        new Ball(new Vector2(1090,452), COLOR.YELLOW),
+        new Ball(new Vector2(1126,354), COLOR.YELLOW),
+        new Ball(new Vector2(1126,433), COLOR.YELLOW),
+        new Ball(new Vector2(1162,413), COLOR.YELLOW),
+        new Ball(new Vector2(1162,491), COLOR.YELLOW),
+        new Ball(new Vector2(1126,393), COLOR.BLACK),
+        new Ball(new Vector2(413,413), COLOR.WHITE) 
+    ];
+    
+    this.whiteBall = this.balls[this.balls.length - 1]; 
+    
+    this.stick = new Stick(new Vector2(this.whiteBall.position.x, this.whiteBall.position.y), this.whiteBall.shoot.bind(this.whiteBall));
 
-    this.whiteBall = this.balls[this.balls.length -1];
-    this.stick = new Stick(new Vector2(413, 413), this.whiteBall.shoot.bind(this.whiteBall));
-
-    this.table ={
+    this.table = {
         TopY: 57,
         RightX: 1443,
         BottomY: 768,
         LeftX: 57
-    }
-}
+    };
+    
+    this.player1Score = 0;
+    this.player2Score = 0;
+    this.currentPlayer = 1;
+    this.gameMode = null; 
+    this.difficulty = null;
+    this.firstShotTaken = false;
+    this.ballsAreMoving = false; 
+
+GameWorld.prototype.init = function(mode, difficulty){
+    this.gameMode = mode;
+    this.difficulty = difficulty;
+};
 
 GameWorld.prototype.handleCollisions = function(){
     for(let i = 0; i < this.balls.length ; i++){
-        this.balls[i].collideWith(this.table);
-        for(let j = i+1; j <this.balls.length ; j++){
+        this.balls[i].collideWith(this.table); 
+        for(let j = i+1; j < this.balls.length ; j++){
             const firstBall = this.balls[i];
             const secondBall = this.balls[j];
-            firstBall.collideWith(secondBall);
+            firstBall.collideWith(secondBall); 
         }
     }   
 }
@@ -44,33 +57,25 @@ GameWorld.prototype.handleCollisions = function(){
 GameWorld.prototype.update = function(){
     this.handleCollisions();
     this.stick.update();
+    
+    this.ballsAreMoving = false; 
     for(let i = 0; i < this.balls.length ; i++){
-        this.Balls[i].update(DELTA);
+        this.balls[i].update(DELTA);
+        if (this.balls[i].moving) {
+            this.ballsAreMoving = true;
+        }
     }
 
-    if(!this.ballsMoving() && this.stick.shot){
+    if(!this.ballsAreMoving && this.stick.shot){
         this.stick.reposition(this.whiteBall.position);
     }
 }
 
 GameWorld.prototype.draw = function(){
-    Canvas.drawImage(sprites.background, {x:0, y:0});
+    Canvas.drawImage(sprites.background, new Vector2(0, 0));
 
     for(let i = 0; i < this.balls.length ; i++){
-        this.Balls[i].draw(DELTA);
+        this.balls[i].draw(); 
     }
 
-    this.stick.draw();
-    
-}
-
-GameWorld.prototype.ballsMoving = function(){
-    let ballsMoving = false;
-
-    for(let i = 0; i< this.balls.length ; i++){
-        if(this.Balls[i].moving){
-            ballsMoving = true;
-            break;
-        }
-    }
-}
+    this.stick.draw(); 
