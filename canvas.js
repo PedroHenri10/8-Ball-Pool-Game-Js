@@ -1,4 +1,11 @@
+// 8-Ball-Pool-Game-Js-main/js/canvas.js
+
 function Canvas2D(){
+    this._canvas = null; // Inicialize como null
+    this._canvasContext = null;
+}
+
+Canvas2D.prototype.init = function() { // Adicione um método init
     this._canvas = document.getElementById('screen');
     if (!this._canvas) {
         console.error("Canvas element with ID 'screen' not found!");
@@ -6,9 +13,16 @@ function Canvas2D(){
     }
     this._canvasContext = this._canvas.getContext('2d');
 
-    this._canvas.width = 1440; 
-    this._canvas.height = 810; 
-}
+    // Usaremos as dimensões da sua imagem de fundo (spr_background5.png), que é 1500x826
+    this._canvas.width = 1500; 
+    this._canvas.height = 826; 
+
+    // Opcional, mas boa prática para garantir que o estilo CSS não sobrescreva a resolução de desenho
+    this._canvas.style.width = this._canvas.width + 'px';
+    this._canvas.style.height = this._canvas.height + 'px';
+
+    console.log("Canvas initialized with dimensions:", this._canvas.width, "x", this._canvas.height);
+};
 
 Canvas2D.prototype.clear = function(){
     if (this._canvasContext) {
@@ -18,6 +32,8 @@ Canvas2D.prototype.clear = function(){
 
 Canvas2D.prototype.drawImage = function(image, position, origin, rotation = 0){
     if (!this._canvasContext || !image) {
+        // Esta linha pode ser útil para depuração se as imagens não aparecerem
+        // console.warn("Cannot draw image: context or image is missing.", image); 
         return;
     }
 
@@ -31,4 +47,4 @@ Canvas2D.prototype.drawImage = function(image, position, origin, rotation = 0){
     this._canvasContext.restore();
 }
 
-let Canvas = new Canvas2D();
+let Canvas = new Canvas2D(); // Apenas instancie, o init será chamado depois

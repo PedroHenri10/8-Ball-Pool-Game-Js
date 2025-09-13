@@ -1,3 +1,5 @@
+// 8-Ball-Pool-Game-Js-main/js/gameworld.js
+
 const DELTA = 1/100; 
 
 function GameWorld(){
@@ -37,6 +39,7 @@ function GameWorld(){
     this.difficulty = null;
     this.firstShotTaken = false;
     this.ballsAreMoving = false; 
+} // Fechamento da função GameWorld
 
 GameWorld.prototype.init = function(mode, difficulty){
     this.gameMode = mode;
@@ -66,17 +69,21 @@ GameWorld.prototype.update = function(){
         }
     }
 
+    // Se as bolas pararam e o taco já atirou, reposiciona o taco
     if(!this.ballsAreMoving && this.stick.shot){
         this.stick.reposition(this.whiteBall.position);
     }
 }
 
 GameWorld.prototype.draw = function(){
+    // Desenha a imagem de fundo (a mesa) primeiro
     Canvas.drawImage(sprites.background, new Vector2(0, 0));
 
+    // Depois desenha as bolas
     for(let i = 0; i < this.balls.length ; i++){
         this.balls[i].draw(); 
     }
 
+    // Por fim, desenha o taco
     this.stick.draw(); 
 }

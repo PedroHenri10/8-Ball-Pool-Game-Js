@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pool Game</title>
-        <link rel="stylesheet" href="style.css"></link>
-    </head>
-    <body>
-                <div id="game-container">
-                <canvas id="screen"></canvas>
-                
-                <div id="game-ui" style="display: none; position: absolute; top: 0; left: 0; width: 100%; color: white; text-align: center; padding: 10px; background-color: rgba(0,0,0,0.5);">
-                    <span id="current-player">Current Player: Player 1</span> | 
-                    <span id="score">Player 1: 0 | Player 2: 0</span>
-                </div>
-            </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pool Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="screen" width="1500" height="826"></canvas>
 
-            <div id="menu-overlay" class="overlay">
-                <h1>Pool Game</h1>
-                <button id="player-vs-player-btn">Player vs Player</button>
-                <button id="player-vs-computer-btn">Player vs Computer</button>
-                <button id="about-btn">About</button>
-            </div>
+    <div id="menu-overlay" style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+      <button class="menu-button" id="player-vs-player-btn">PLAYER vs PLAYER</button>
+      <button class="menu-button" id="player-vs-computer-btn">PLAYER vs COMPUTER</button>
+      <button class="menu-button" id="about-btn">ABOUT</button>
+    </div>
 
-            <div id="difficulty-overlay" class="overlay" style="display: none;">
-                <h2>Choose Difficulty</h2>
-                <button class="difficulty-button" data-difficulty="easy">Easy</button>
-                <button class="difficulty-button" data-difficulty="medium">Medium</button>
-                <button class="difficulty-button" data-difficulty="hard">Hard</button>
-                <button id="difficulty-back-btn">Back</button>
-            </div>
+    <div id="controls-overlay" style="display:none;">
+      <h2>CONTROLS:</h2>
+      <div class="control-item"><span class="key">W</span> <span class="description">- Increase power</span></div>
+      <div class="control-item"><span class="key">S</span> <span class="description">- Decrease power</span></div>
+      <div class="control-item"><span class="key">MOUSE CLICK</span> <span class="description">- Shoot</span></div>
+      <div class="control-item"><span class="key">ESC</span> <span class="description">- Back to menu</span></div>
+      <button class="back-button" id="controls-back-btn">BACK</button>
+    </div>
 
-            <div id="controls-overlay" class="overlay" style="display: none;">
-                <h2>Controls</h2>
-                <p>Aim: Mouse</p>
-                <p>Shoot: Left Click</p>
-                <p>Power: Mouse position from white ball</p>
-                <button id="controls-back-btn">Back</button>
-            </div>
+    <div id="difficulty-overlay" style="display:none;">
+      <button class="difficulty-button" data-difficulty="easy">EASY</button>
+      <button class="difficulty-button" data-difficulty="medium">MEDIUM</button>
+      <button class="difficulty-button" data-difficulty="hard">HARD</button>
+      <button class="back-button" id="difficulty-back-btn">BACK</button>
+    </div>
 
-            <script src="js/Color.js"></script>
-            <script src="js/Vector2.js"></script> 
-            <script src="js/Ball.js"></script>    
-            <script src="js/Stick.js"></script>   
-            <script src="js/canvas.js"></script>
-            <script src="js/assets.js"></script>
-            <script src="js/gameworld.js"></script>
-            <script src="js/game.js"></script>
-            <script src="js/menu.js"></script>
-    </body>
+    <div id="game-ui" style="display:none;">
+      <div id="current-player">Current Player: Player 1</div>
+      <div id="score">Player 1: 0 | 0 :Player 2</div>
+    </div>
+  </div>
+
+  
+  <script src="Vector2.js"></script>
+  <script src="Color.js"></script>        
+  <script src="Ball.js"></script>
+  <script src="Stick.js"></script>
+  <script src="assets.js"></script>       
+  <script src="gameWorld.js"></script>
+  <script src="game.js"></script>
+  <script src="menu.js"></script>
+  <script src="./input/ButtonState.js"></script>
+  <script src="./input/Mouse.js"></script>
+  <script src="canvas.js"></script>
+</body>
 </html>
-
-    
