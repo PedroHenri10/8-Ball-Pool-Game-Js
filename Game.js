@@ -19,10 +19,16 @@ Game.prototype.init = function (mode, difficultySetting) {
 
 Game.prototype.mainLoop = function () {
     if (!this.gameWorld) return;
-    Canvas.clear();
+
+    Canvas.beginDrawing();
+
     this.gameWorld.update();
     this.gameWorld.draw();
+    
+    Canvas.endDrawing();
+    
     this.updateUI();
+
     requestAnimationFrame(this.mainLoop.bind(this));
 };
 
@@ -40,8 +46,8 @@ function startGame(mode, difficulty) {
     PoolGame.mainLoop();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    Canvas.init();
+document.addEventListener('DOMContentLoaded', () => { 
+
     loadAssets(() => {
         console.log("Todos os assets carregados! Jogo pronto para iniciar.");
         const menu = document.getElementById('menu-overlay');
