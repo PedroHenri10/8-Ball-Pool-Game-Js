@@ -11,11 +11,15 @@ Canvas2D.prototype.init = function () {
     }
     this._canvasContext = this._canvas.getContext('2d');
 
-    this._canvas.width = 1500;
-    this._canvas.height = 826;
+   this.resizeCanvas();
 
-    this._canvas.style.width = this._canvas.width + 'px';
-    this._canvas.style.height = this._canvas.height + 'px';
+    window.addEventListener('resize', () => this.resizeCanvas());
+};
+
+Canvas2D.prototype.resizeCanvas = function () {
+    this._canvas.width = window.innerWidth;
+    this._canvas.height = window.innerHeight;
+
 };
 
 Canvas2D.prototype.clear = function () {
