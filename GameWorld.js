@@ -19,6 +19,18 @@ function GameWorld() {
         new Ball(new Vector2(413, 413), COLOR.WHITE)
     ];
 
+    this.pockets = [
+        { x: 41, y: 41, radius: 28 },   
+        { x: 750, y: 25, radius: 28 },  
+        { x: 1459, y: 41, radius: 28 }, 
+        { x: 41, y: 785, radius: 28 },   
+        { x: 750, y: 801, radius: 28 }, 
+        { x: 1459, y: 785, radius: 28 }  
+    ];
+
+    this.shotInProgress = false;
+    this.turnMadeValidPocket = false;
+
     this.whiteBall = this.balls[this.balls.length - 1];
     this.stick = new Stick(new Vector2(this.whiteBall.position.x, this.whiteBall.position.y), this.whiteBall.shoot.bind(this.whiteBall));
 
@@ -32,6 +44,9 @@ function GameWorld() {
     this.player1Score = 0;
     this.player2Score = 0;
     this.currentPlayer = 1;
+    this.player1BallType = null; 
+    this.player2BallType = null; 
+    this.firstBallPocketed = true; 
     this.gameMode = null;
     this.difficulty = null;
     this.firstShotTaken = false;
@@ -59,15 +74,23 @@ GameWorld.prototype.update = function () {
     if (this.stick) this.stick.update();
 
     this.ballsAreMoving = false;
-    for (let i = 0; i < this.balls.length; i++) {
-        this.balls[i].update(DELTA);
-        if (this.balls[i].moving) this.ballsAreMoving = true;
+    for (let i = this.balls.length - 1; i >= 0; i--) {
+        const ball = this.balls[i];
+        ball.update(DELTA);
+        if (ball.moving) this.ballsAreMoving = true;
+
+        
+        
+
+
     }
 
     if (!this.ballsAreMoving && this.stick && this.stick.shot) {
         this.stick.reposition(this.whiteBall.position);
+        this.switchTurn(); 
     }
 };
+
 
 GameWorld.prototype.draw = function () {
     if (sprites.background) Canvas.drawImage(sprites.background, new Vector2(0, 0));
@@ -83,3 +106,17 @@ GameWorld.prototype.draw = function () {
 
     if (this.stick) this.stick.draw();
 };
+
+GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
+    pocketedBall.inHole = true;
+
+    
+
+    
+
+    
+
+   
+};
+
+
