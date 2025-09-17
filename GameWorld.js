@@ -80,7 +80,16 @@ GameWorld.prototype.update = function () {
         if (ball.moving) this.ballsAreMoving = true;
 
         
-        
+        for (let p of this.pockets) {
+            const dx = ball.position.x - p.x;
+            const dy = ball.position.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < p.radius + ball.radius) {
+                this.handlePocketing(ball, i);
+                break;
+            }
+        }
 
 
     }
