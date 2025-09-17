@@ -114,7 +114,24 @@ GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
 
     
 
-    
+    this.balls.splice(ballIndex, 1); 
+
+    const pocketedType = pocketedBall.type;
+
+    if (this.firstBallPocketed) {
+        console.log(`Primeira bola encaçapada: ${pocketedType}. Tipos definidos!`);
+        if (this.currentPlayer === 1) {
+            this.player1BallType = pocketedType;
+            this.player2BallType = (pocketedType === 'red') ? 'yellow' : 'red';
+            this.player1Score++;
+        } else {
+            this.player2BallType = pocketedType;
+            this.player1BallType = (pocketedType === 'red') ? 'yellow' : 'red';
+            this.player2Score++;
+        }
+        this.firstBallPocketed = false; 
+        return;
+    }
 
     const currentPlayerBallType = this.currentPlayer === 1 ? this.player1BallType : this.player2BallType;
     
