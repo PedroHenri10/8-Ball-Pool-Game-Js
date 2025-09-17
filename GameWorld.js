@@ -116,7 +116,20 @@ GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
 
     
 
-   
+    const currentPlayerBallType = this.currentPlayer === 1 ? this.player1BallType : this.player2BallType;
+    
+    if (pocketedType === currentPlayerBallType) {
+        if (this.currentPlayer === 1) this.player1Score++;
+        else this.player2Score++;
+        
+        console.log(`Jogador ${this.currentPlayer} encaçapou sua bola (${pocketedType}). Continua a jogar.`);
+    } else {
+        if (this.currentPlayer === 1) this.player2Score++;
+        else this.player1Score++;
+        
+        console.log(`FALTA! Jogador ${this.currentPlayer} encaçapou a bola do oponente (${pocketedType}).`);
+        this.switchTurn();
+    }
 };
 
 GameWorld.prototype.switchTurn = function () {
