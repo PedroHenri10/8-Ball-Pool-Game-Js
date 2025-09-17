@@ -112,7 +112,19 @@ GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
 
     
 
-    
+    if (pocketedBall.type === 'black') {
+        this.balls.splice(ballIndex, 1); 
+
+        const currentPlayerBallType = this.currentPlayer === 1 ? this.player1BallType : this.player2BallType;
+        let playerBallsRemaining = this.balls.some(ball => ball.type === currentPlayerBallType);
+
+        if (playerBallsRemaining) {
+            console.log(`Jogador ${this.currentPlayer} encaçapou a bola 8 cedo demais. DERROTA!`);
+        } else {
+            console.log(`Jogador ${this.currentPlayer} encaçapou todas as suas bolas e a 8. VITÓRIA!`);
+        }
+        return;
+    }
 
     this.balls.splice(ballIndex, 1); 
 
