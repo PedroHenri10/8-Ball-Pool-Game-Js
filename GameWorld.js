@@ -119,4 +119,7 @@ GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
    
 };
 
-
+GameWorld.prototype.switchTurn = function () {
+    this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+    console.log(`Agora é a vez do Jogador ${this.currentPlayer}`);
+};
