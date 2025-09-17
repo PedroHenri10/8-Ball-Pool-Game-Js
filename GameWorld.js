@@ -110,7 +110,17 @@ GameWorld.prototype.draw = function () {
 GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
     pocketedBall.inHole = true;
 
-    
+    if (pocketedBall.type === 'white') {
+        this.balls.splice(ballIndex, 1);
+        console.log("FALTA! Bola branca encaçapada.");
+
+        this.whiteBall.position = this.whiteBall.initialPosition.copy();
+        this.whiteBall.velocity = new Vector2(0, 0);
+
+        this.balls.push(this.whiteBall); 
+        this.switchTurn(); 
+        return; 
+    }
 
     if (pocketedBall.type === 'black') {
         this.balls.splice(ballIndex, 1); 
