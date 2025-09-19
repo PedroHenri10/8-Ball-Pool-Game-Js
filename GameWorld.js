@@ -2,22 +2,23 @@ const DELTA = 1 / 100;
 
 function GameWorld() {
     this.balls = [
-        new Ball(new Vector2(1056, 433), COLOR.RED),
-        new Ball(new Vector2(1090, 374), COLOR.RED),
-        new Ball(new Vector2(1126, 472), COLOR.RED),
-        new Ball(new Vector2(1162, 335), COLOR.RED),
-        new Ball(new Vector2(1162, 374), COLOR.RED),
-        new Ball(new Vector2(1162, 452), COLOR.RED),
-        new Ball(new Vector2(1022, 413), COLOR.YELLOW),
-        new Ball(new Vector2(1056, 393), COLOR.YELLOW),
-        new Ball(new Vector2(1090, 452), COLOR.YELLOW),
-        new Ball(new Vector2(1126, 354), COLOR.YELLOW),
-        new Ball(new Vector2(1126, 433), COLOR.YELLOW),
-        new Ball(new Vector2(1162, 413), COLOR.YELLOW),
-        new Ball(new Vector2(1162, 491), COLOR.YELLOW),
-        new Ball(new Vector2(1126, 393), COLOR.BLACK),
-        new Ball(new Vector2(413, 413), COLOR.WHITE)
-    ];
+    new Ball(new Vector2(1056, 433), COLOR.RED, "red"),
+    new Ball(new Vector2(1090, 374), COLOR.RED, "red"),
+    new Ball(new Vector2(1126, 472), COLOR.RED, "red"),
+    new Ball(new Vector2(1162, 335), COLOR.RED, "red"),
+    new Ball(new Vector2(1162, 374), COLOR.RED, "red"),
+    new Ball(new Vector2(1162, 452), COLOR.RED, "red"),
+    new Ball(new Vector2(1022, 413), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1056, 393), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1090, 452), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1126, 354), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1126, 433), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1162, 413), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1162, 491), COLOR.YELLOW, "yellow"),
+    new Ball(new Vector2(1126, 393), COLOR.BLACK, "black"),
+    new Ball(new Vector2(413, 413), COLOR.WHITE, "white")
+];
+
 
     this.pockets = [
         { x: 41, y: 41, radius: 28 },   
@@ -85,10 +86,11 @@ GameWorld.prototype.update = function () {
             const dy = ball.position.y - p.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist < p.radius + ball.radius) {
-                this.handlePocketing(ball, i);
-                break;
-            }
+            if (dist < p.radius + BALL_RADIUS) {
+    this.handlePocketing(ball, i);
+    break;
+}
+
         }
 
 
@@ -120,16 +122,17 @@ GameWorld.prototype.handlePocketing = function (pocketedBall, ballIndex) {
     pocketedBall.inHole = true;
 
     if (pocketedBall.type === 'white') {
-        this.balls.splice(ballIndex, 1);
-        console.log("FALTA! Bola branca encaçapada.");
+    this.balls.splice(ballIndex, 1);
+    console.log("FALTA! Bola branca encaçapada.");
 
-        this.whiteBall.position = this.whiteBall.initialPosition.copy();
-        this.whiteBall.velocity = new Vector2(0, 0);
+    this.whiteBall.position = this.whiteBall.initialPosition.copy();
+    this.whiteBall.velocity = new Vector2(0, 0);
 
-        this.balls.push(this.whiteBall); 
-        this.switchTurn(); 
-        return; 
-    }
+    this.balls.push(this.whiteBall); 
+    this.switchTurn(); 
+    return; 
+}
+
 
     if (pocketedBall.type === 'black') {
         this.balls.splice(ballIndex, 1); 

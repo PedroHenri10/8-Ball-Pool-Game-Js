@@ -2,12 +2,16 @@ const BALL_ORIGIN = new Vector2(25, 25);
 const BALL_DIAMETER = 30;
 const BALL_RADIUS = BALL_DIAMETER / 2;
 
-function Ball(position, color) {
+function Ball(position, color, type) {
     this.position = position.copy ? position.copy() : new Vector2(position.x, position.y);
     this.velocity = new Vector2();
     this.moving = false;
     this.color = color;
+    this.type = type; // <--- ADICIONADO
     this.sprite = getBallSpriteByColor(color);
+    if (type === "white") {
+        this.initialPosition = this.position.copy(); // <--- ADICIONADO
+    }
 }
 
 Ball.prototype.update = function (delta) {
